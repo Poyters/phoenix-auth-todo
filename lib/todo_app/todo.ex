@@ -22,6 +22,15 @@ defmodule TodoApp.Todo do
   end
 
   @doc """
+  Zwraca listę zadań przypisanych do danego użytkownika.
+  """
+  def list_user_tasks(user) do
+    Task
+    |> where([t], t.user_id == ^user.id)
+    |> Repo.all()
+  end
+
+  @doc """
   Gets a single task.
 
   Raises `Ecto.NoResultsError` if the Task does not exist.
@@ -50,6 +59,9 @@ defmodule TodoApp.Todo do
 
   """
   def create_task(attrs \\ %{}) do
+    IO.inspect "attrs"
+    IO.inspect attrs
+
     %Task{}
     |> Task.changeset(attrs)
     |> Repo.insert()
