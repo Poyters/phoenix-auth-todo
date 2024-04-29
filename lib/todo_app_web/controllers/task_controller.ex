@@ -18,17 +18,8 @@ defmodule TodoAppWeb.TaskController do
 
   def create(conn, %{"task" => task_params}) do
     user = conn.assigns.current_user
-
-    IO.inspect "user"
-    IO.inspect user
-
-    IO.inspect "params"
-    IO.inspect task_params
-
     task_params_id = Map.put(task_params, "user_id", user.id)
 
-    IO.inspect "params id"
-    IO.inspect task_params_id
     case Todo.create_task(task_params_id) do
       {:ok, task} ->
         conn
